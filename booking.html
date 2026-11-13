@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a Taxi | Namaste Cabs Mangaluru</title>
+  <meta name="description" content="Book a taxi with Namaste Cabs in Mangaluru. Send your pickup, destination and travel details online or through WhatsApp.">
+  <link rel="canonical" href="https://namastecabs.co.in/booking.html">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav-container">
+    <a href="index.html" class="brand">
+      <span class="brand-symbol">N</span>
+      <span class="brand-name">NAMASTE <small>CABS</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="fleet.html">Our Fleet</a>
+      <a href="packages.html">Packages</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html" class="nav-book active">Book a Cab</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">TRAVEL BEGINS HERE</span>
+    <h1>Book Your Journey</h1>
+    <p>Share your travel details and send us an enquiry.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <form class="form-card" id="bookingForm">
+      <input type="hidden" name="_subject" value="New Namaste Cabs Booking Enquiry">
+      <input type="hidden" name="_template" value="table">
+
+      <h2>Booking Details</h2>
+      <p>Fields marked * are required. Your booking is an enquiry, not a confirmed reservation.</p>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input id="name" name="Customer Name" required maxlength="80" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Mobile Number *</label>
+          <input id="phone" name="Mobile Number" type="tel" required maxlength="15" autocomplete="tel" pattern="[0-9+ -]{8,15}">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="Email" type="email" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Service Required *</label>
+          <select id="service" name="Service Required" required>
+            <option value="">Choose service</option>
+            <option>Local Taxi</option>
+            <option>Airport Pickup</option>
+            <option>Airport Drop</option>
+            <option>Railway Station Transfer</option>
+            <option>Outstation Travel</option>
+            <option>Tour Package</option>
+            <option>Corporate Travel</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pickup">Pickup Location *</label>
+          <input id="pickup" name="Pickup Location" required>
+        </div>
+
+        <div class="form-group">
+          <label for="destination">Destination *</label>
+          <input id="destination" name="Destination" required>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Pickup Date *</label>
+          <input id="date" name="Pickup Date" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="time">Pickup Time *</label>
+          <input id="time" name="Pickup Time" type="time" required>
+        </div>
+
+        <div class="form-group">
+          <label for="passengers">Number of Passengers *</label>
+          <select id="passengers" name="Passengers" required>
+            <option value="">Select passengers</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+            <option>7</option><option>8</option><option>9</option>
+            <option>10+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicle">Preferred Vehicle</label>
+          <select id="vehicle" name="Preferred Vehicle">
+            <option>No preference</option>
+            <option>Sedan</option>
+            <option>SUV</option>
+            <option>Tempo Traveller</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="message">Additional Requirements</label>
+          <textarea id="message" name="Additional Requirements" maxlength="1000" placeholder="Return journey, luggage, additional stops, etc."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark">Submit Booking Enquiry</button>
+      <p id="formMessage" class="form-message" aria-live="polite"></p>
+
+      <div class="divider"></div>
+      <p>Prefer WhatsApp? Send your booking details directly to us.</p>
+      <button type="button" id="whatsappBooking" class="btn btn-gold">Continue with WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> Namaste Cabs</span>
+    <span><a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    <a href="tel:+919180412911">Call +91 91804 12911</a>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+document.getElementById("date").min = new Date().toLocaleDateString("en-CA");
+
+document.getElementById("whatsappBooking").addEventListener("click", () => {
+  const form = document.getElementById("bookingForm");
+
+  if (!form.reportValidity()) return;
+
+  const data = new FormData(form);
+  let message = "Hello Namaste Cabs! I would like to enquire about a booking.\n\n";
+
+  for (const [key, value] of data.entries()) {
+    if (value && !key.startsWith("_")) {
+      message += key + ": " + value + "\n";
+    }
+  }
+
+  window.open(
+    "https://wa.me/919180412911?text=" + encodeURIComponent(message),
+    "_blank",
+    "noopener"
+  );
+});
+</script>
+</body>
+</html>
